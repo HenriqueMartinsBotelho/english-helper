@@ -3,7 +3,7 @@ import { FaGithub } from "react-icons/fa";
 const Menu = () => {
   return (
     <header>
-      <nav className="bg-white border-gray-200 px-4 lg:px-6 py-2.5 dark:bg-gray-800">
+      <nav className="bg-white border-gray-200 px-4 lg:px-6 py-2.5 dark:bg-gray-800 w-full ">
         <div className="flex flex-wrap items-center justify-between max-w-screen-xl mx-auto">
           <a href="https://flowbite.com" className="flex items-center">
             <img

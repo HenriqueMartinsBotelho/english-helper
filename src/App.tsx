@@ -1,15 +1,19 @@
 import { useState } from "react";
 import Menu from "./components/Menu";
+import Sidebar from "./components/Sidebar";
 
 function App() {
   return (
     <>
-      <div>
+      <div className="w-full">
         <Menu />
-        <div className="flex justify-center gap-4 mt-4">
-          <UserInputBox />
-          <div className="w-[500px] h-full bg-green-400">a</div>
-          <div className="w-[500px] h-full bg-blue-400">a</div>
+        <div className="flex">
+          <Sidebar />
+          <div className="flex gap-4 p-4 mt-4">
+            <UserInputBox />
+            <div className="w-[500px] h-full bg-green-400">a</div>
+            <div className="w-[500px] h-full bg-blue-400">a</div>
+          </div>
         </div>
       </div>
     </>
