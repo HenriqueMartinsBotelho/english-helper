@@ -1,12 +1,16 @@
 import { useState } from "react";
+import Menu from "./components/Menu";
 
 function App() {
   return (
     <>
-      <div className="flex justify-center gap-4">
-        <UserInputBox />
-        <div className="w-[500px] h-full bg-green-400">a</div>
-        <div className="w-[500px] h-full bg-blue-400">a</div>
+      <div>
+        <Menu />
+        <div className="flex justify-center gap-4 mt-4">
+          <UserInputBox />
+          <div className="w-[500px] h-full bg-green-400">a</div>
+          <div className="w-[500px] h-full bg-blue-400">a</div>
+        </div>
       </div>
     </>
   );
