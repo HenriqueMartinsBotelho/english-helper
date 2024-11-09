@@ -20,7 +20,7 @@ function UserInputBox({ addChatItem, currentChat }: UserInputBoxProps) {
   };
 
   const handleSubmit = async () => {
-    if (!userText.trim()) return; // Prevent submission if the text is empty
+    if (!userText.trim()) return;
     const main = userText;
     const ans1 = await getAI("Improve the text", userText);
     const ans2 = await getAI("Fix the grammatical errors", userText);
