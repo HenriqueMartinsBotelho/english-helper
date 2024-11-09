@@ -1,12 +1,13 @@
 import { useState } from "react";
 import Menu from "./components/Menu";
 import Sidebar from "./components/Sidebar";
-import chats from "./constants/chat";
 import UserInputBox from "./components/UserInputBox";
 import Box2 from "./components/Box2";
+import useChat from "./hooks/useChat";
 
 function App() {
   const [currentChat, setCurrentChat] = useState<string>("Chat1");
+  const { chats, addChatItem } = useChat();
 
   const sidebarItems = [
     { name: "Chat1", link: "#", current: currentChat === "Chat1" },
@@ -19,13 +20,14 @@ function App() {
       <div className="flex bg-slate-400">
         <Sidebar sidebarItems={sidebarItems} setCurrentChat={setCurrentChat} />
         <div className="flex flex-col flex-wrap gap-4 p-4 mt-4">
-          {chats[currentChat].map((chat, index) => (
+          {chats[currentChat]?.map((chat, index) => (
             <div key={index} className="flex gap-4">
-              <UserInputBox />
-              <Box2 content={chat.column1} />
-              <Box2 content={chat.column2} />
+              <Box2 content={chat.main} />
+              <Box2 content={chat.ans1} />
+              <Box2 content={chat.ans2} />
             </div>
           ))}
+          <UserInputBox addChatItem={addChatItem} currentChat={currentChat} />
         </div>
       </div>
     </div>

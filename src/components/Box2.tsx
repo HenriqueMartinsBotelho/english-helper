@@ -4,7 +4,7 @@ interface Box2Props {
 
 function Box2({ content }: Box2Props) {
   return (
-    <div className="w-[500px] h-fit break-words bg-green-400 p-4">
+    <div className="w-[400px] h-[200px] border border-black bg-slate-100 p-2">
       {content}
     </div>
   );

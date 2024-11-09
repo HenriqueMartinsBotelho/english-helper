@@ -1,9 +1,9 @@
 import { FaGithub } from "react-icons/fa";
 
-const Menu = () => {
+function Menu() {
   return (
     <header>
-      <nav className="bg-white border-gray-200 px-4 lg:px-6 py-2.5 dark:bg-gray-800 w-full ">
+      <nav className="bg-white border-gray-200 px-4 lg:px-6 py-2.5 dark:bg-gray-800 w-full">
         <div className="flex flex-wrap items-center justify-between max-w-screen-xl mx-auto">
           <a href="https://flowbite.com" className="flex items-center">
             <img
@@ -22,7 +22,6 @@ const Menu = () => {
             >
               <FaGithub size={32} />
             </a>
-
             <button
               data-collapse-toggle="mobile-menu-2"
               type="button"
@@ -31,7 +30,6 @@ const Menu = () => {
               aria-expanded="false"
             >
               <span className="sr-only">Open main menu</span>
-              aaa
             </button>
           </div>
           <div
@@ -62,6 +60,6 @@ const Menu = () => {
       </nav>
     </header>
   );
-};
+}
 
 export default Menu;
