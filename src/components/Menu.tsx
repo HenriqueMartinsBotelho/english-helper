@@ -1,11 +1,58 @@
+import { useState } from "react";
 import { FaGithub } from "react-icons/fa";
+import { useLocalStorage } from "../hooks/useLocalStorage";
+
+interface Settings {
+  privateKey: string;
+  prompts: string[];
+}
 
 function Menu() {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const { value: storedSettings, setValue: setStoredSettings } =
+    useLocalStorage<Settings>("settings", {
+      privateKey: "",
+      prompts: ["", ""],
+    });
+
+  const [settings, setSettings] = useState<Settings>(
+    storedSettings || { privateKey: "", prompts: ["", ""] }
+  );
+
+  const handleOpenModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+  };
+
+  const handleSaveSettings = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setStoredSettings(settings);
+    setIsModalOpen(false);
+  };
+
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    const { name, value } = e.target;
+    if (name === "privateKey") {
+      setSettings({ ...settings, privateKey: value });
+    } else if (name.startsWith("prompt")) {
+      const index = parseInt(name.replace("prompt", "")) - 1;
+      const newPrompts = [...settings.prompts];
+      newPrompts[index] = value;
+      setSettings({ ...settings, prompts: newPrompts });
+    }
+  };
+
   return (
     <header>
       <nav className="bg-white border-gray-200 px-4 lg:px-6 py-2.5 dark:bg-gray-800 w-full">
         <div className="flex flex-wrap items-center justify-between max-w-screen-xl mx-auto">
-          <a href="https://flowbite.com" className="flex items-center">
+          <a href="/" className="flex items-center">
             <img
               src="https://flowbite.com/docs/images/logo.svg"
               className="h-6 mr-3 sm:h-9"
@@ -54,10 +101,76 @@ function Menu() {
                   About
                 </a>
               </li>
+              <li>
+                <button
+                  onClick={handleOpenModal}
+                  className="block py-2 pl-3 pr-4 text-gray-700 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 lg:p-0 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent"
+                >
+                  Settings
+                </button>
+              </li>
             </ul>
           </div>
         </div>
       </nav>
+
+      {isModalOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+          <div className="w-1/3 p-6 bg-white rounded-lg">
+            <h2 className="mb-4 text-xl font-semibold">Settings</h2>
+            <form onSubmit={handleSaveSettings}>
+              <div className="mb-4">
+                <label
+                  htmlFor="privateKey"
+                  className="block text-sm font-medium text-gray-700"
+                >
+                  Private Key
+                </label>
+                <input
+                  type="text"
+                  id="privateKey"
+                  name="privateKey"
+                  value={settings.privateKey}
+                  onChange={handleChange}
+                  className="block w-full p-2 mt-1 border border-gray-300 rounded-md shadow-sm"
+                />
+              </div>
+              {settings.prompts.map((prompt, index) => (
+                <div className="mb-4" key={index}>
+                  <label
+                    htmlFor={`prompt${index + 1}`}
+                    className="block text-sm font-medium text-gray-700"
+                  >
+                    Prompt {index + 1}
+                  </label>
+                  <textarea
+                    id={`prompt${index + 1}`}
+                    name={`prompt${index + 1}`}
+                    value={prompt}
+                    onChange={handleChange}
+                    className="block w-full p-2 mt-1 border border-gray-300 rounded-md shadow-sm"
+                  />
+                </div>
+              ))}
+              <div className="flex justify-end">
+                <button
+                  type="button"
+                  onClick={handleCloseModal}
+                  className="px-4 py-2 mr-2 text-white bg-gray-500 rounded"
+                >
+                  Cancel
+                </button>
+                <button
+                  type="submit"
+                  className="px-4 py-2 text-white bg-blue-500 rounded"
+                >
+                  Save
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
     </header>
   );
 }

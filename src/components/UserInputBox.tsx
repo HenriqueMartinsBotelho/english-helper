@@ -1,5 +1,6 @@
 import { useState } from "react";
 import getAI from "../utils/ai";
+import { useLocalStorage } from "../hooks/useLocalStorage";
 
 interface ChatItem {
   main: string;
@@ -12,22 +13,40 @@ interface UserInputBoxProps {
   currentChat: string;
 }
 
+interface Settings {
+  privateKey: string;
+  prompts: string[];
+}
+
 function UserInputBox({ addChatItem, currentChat }: UserInputBoxProps) {
   const [userText, setUserText] = useState<string>("");
+
+  const { value: settingsValue } = useLocalStorage<Settings>("settings");
+  console.log(settingsValue);
+  const settings = settingsValue || { privateKey: "", prompts: ["", ""] };
+
+  const privateKey = settings.privateKey;
+  const prompt1Value = settings.prompts ? settings.prompts[0] : "";
+  const prompt2Value = settings.prompts ? settings.prompts[1] : "";
 
   const handleUserText = (value: string) => {
     setUserText(value);
   };
 
   const handleSubmit = async () => {
-    if (!userText.trim()) return;
+    console.log(privateKey, prompt1Value, prompt2Value);
+    if (!userText.trim() || !privateKey) return;
     const main = userText;
     const ans1 = await getAI(
-      "Rewrite this text in a more natural and fluent English style:",
+      privateKey,
+      prompt1Value ||
+        "Rewrite this text in a more natural and fluent English style:",
       userText
     );
     const ans2 = await getAI(
-      "Find grammar issues, briefly explain why they are incorrect, and provide a corrected version of this text:",
+      privateKey,
+      prompt2Value ||
+        "Find grammar issues, briefly explain why they are incorrect, and provide a corrected version of this text:",
       userText
     );
 
@@ -42,6 +61,7 @@ function UserInputBox({ addChatItem, currentChat }: UserInputBoxProps) {
   };
 
   const handleKeyDown = (event: React.KeyboardEvent<HTMLTextAreaElement>) => {
+    console.log(privateKey, prompt1Value, prompt2Value);
     if (event.key === "Enter" && !event.shiftKey) {
       event.preventDefault();
       handleSubmit();
@@ -56,7 +76,7 @@ function UserInputBox({ addChatItem, currentChat }: UserInputBoxProps) {
         value={userText}
         onChange={(e) => handleUserText(e.target.value)}
         onKeyDown={handleKeyDown}
-        placeholder="Type something in english here..."
+        placeholder="Type something in English here..."
       />
     </div>
   );

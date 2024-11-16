@@ -1,10 +1,12 @@
 import { GoogleGenerativeAI } from "@google/generative-ai";
-import { geminiKey } from "../constants/temp";
 
-async function getAI(prompt: string, text: string): Promise<string> {
+async function getAI(
+  geminiKey: string,
+  prompt: string,
+  text: string
+): Promise<string> {
   try {
     const genAI = new GoogleGenerativeAI(geminiKey);
-
     const model = await genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
     console.log("PROMPT + TEXT", prompt + text);
