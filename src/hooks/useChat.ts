@@ -31,7 +31,17 @@ function useChat() {
     });
   };
 
-  return { chats, addChatItem };
+  const removeChatItem = (chatKey: string, index: number) => {
+    setChats((prevChats) => {
+      const updatedChat = {
+        ...prevChats,
+        [chatKey]: prevChats[chatKey].filter((_, i) => i !== index),
+      };
+      return updatedChat;
+    });
+  };
+
+  return { chats, addChatItem, removeChatItem };
 }
 
 export default useChat;

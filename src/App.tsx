@@ -4,10 +4,11 @@ import Sidebar from "./components/Sidebar";
 import UserInputBox from "./components/UserInputBox";
 import Box2 from "./components/Box2";
 import useChat from "./hooks/useChat";
+import { FaTrash } from "react-icons/fa";
 
 function App() {
   const [currentChat, setCurrentChat] = useState<string>("Chat1");
-  const { chats, addChatItem } = useChat();
+  const { chats, addChatItem, removeChatItem } = useChat();
 
   const sidebarItems = [
     { name: "Chat1", link: "#", current: currentChat === "Chat1" },
@@ -25,6 +26,10 @@ function App() {
               <Box2 content={chat.main} />
               <Box2 content={chat.ans1} />
               <Box2 content={chat.ans2} />
+              <FaTrash
+                className="self-center text-red-500 cursor-pointer"
+                onClick={() => removeChatItem(currentChat, index)}
+              />
             </div>
           ))}
           <UserInputBox addChatItem={addChatItem} currentChat={currentChat} />
