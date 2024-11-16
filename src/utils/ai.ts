@@ -7,7 +7,9 @@ async function getAI(
 ): Promise<string> {
   try {
     const genAI = new GoogleGenerativeAI(geminiKey);
-    const model = await genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+    const model = await genAI.getGenerativeModel({
+      model: "gemini-1.5-flash",
+    });
 
     console.log("PROMPT + TEXT", prompt + text);
     const response = await model.generateContent(prompt + text);

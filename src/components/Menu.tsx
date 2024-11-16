@@ -127,7 +127,7 @@ function Menu() {
                   Private Key
                 </label>
                 <input
-                  type="text"
+                  type="password"
                   id="privateKey"
                   name="privateKey"
                   value={settings.privateKey}
