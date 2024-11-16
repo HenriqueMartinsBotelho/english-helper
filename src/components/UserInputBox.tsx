@@ -22,8 +22,14 @@ function UserInputBox({ addChatItem, currentChat }: UserInputBoxProps) {
   const handleSubmit = async () => {
     if (!userText.trim()) return;
     const main = userText;
-    const ans1 = await getAI("Improve the text", userText);
-    const ans2 = await getAI("Fix the grammatical errors", userText);
+    const ans1 = await getAI(
+      "Rewrite this text in a more natural and fluent English style:",
+      userText
+    );
+    const ans2 = await getAI(
+      "Find grammar issues, briefly explain why they are incorrect, and provide a corrected version of this text:",
+      userText
+    );
 
     const newChatItem = {
       main,
@@ -50,6 +56,7 @@ function UserInputBox({ addChatItem, currentChat }: UserInputBoxProps) {
         value={userText}
         onChange={(e) => handleUserText(e.target.value)}
         onKeyDown={handleKeyDown}
+        placeholder="Type something in english here..."
       />
     </div>
   );
