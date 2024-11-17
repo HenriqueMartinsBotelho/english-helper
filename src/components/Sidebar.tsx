@@ -1,15 +1,34 @@
-interface SidebarItem {
+export interface SidebarItem {
   name: string;
-  link: string;
   current: boolean;
 }
 
 interface SideBarProps {
   sidebarItems: SidebarItem[];
+  setSidebarItems: React.Dispatch<React.SetStateAction<SidebarItem[]>>;
   setCurrentChat: React.Dispatch<React.SetStateAction<string>>;
 }
 
-const Sidebar = ({ sidebarItems, setCurrentChat }: SideBarProps) => {
+import { useState } from "react";
+
+const Sidebar = ({
+  sidebarItems,
+  setSidebarItems,
+  setCurrentChat,
+}: SideBarProps) => {
+  const [newItemName, setNewItemName] = useState("");
+
+  const addSidebarItem = () => {
+    if (newItemName.trim()) {
+      const newItem: SidebarItem = {
+        name: newItemName,
+        current: false,
+      };
+      setSidebarItems([...sidebarItems, newItem]);
+      setNewItemName("");
+    }
+  };
+
   return (
     <>
       <button
@@ -20,19 +39,6 @@ const Sidebar = ({ sidebarItems, setCurrentChat }: SideBarProps) => {
         className="inline-flex items-center p-2 mt-2 text-sm text-gray-500 rounded-lg ms-3 sm:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
       >
         <span className="sr-only">Open sidebar</span>
-        <svg
-          className="w-6 h-6"
-          aria-hidden="true"
-          fill="currentColor"
-          viewBox="0 0 20 20"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            clipRule="evenodd"
-            fillRule="evenodd"
-            d="M2 4.75A.75.75 0 012.75 4h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 4.75zm0 10.5a.75.75 0 01.75-.75h7.5a.75.75 0 010 1.5h-7.5a.75.75 0 01-.75-.75zM2 10a.75.75 0 01.75-.75h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 10z"
-          ></path>
-        </svg>
       </button>
 
       <aside
@@ -44,8 +50,7 @@ const Sidebar = ({ sidebarItems, setCurrentChat }: SideBarProps) => {
           <ul className="space-y-2 font-medium">
             {sidebarItems.map((item) => (
               <li key={item.name}>
-                <a
-                  href={item.link}
+                <div
                   onClick={() => setCurrentChat(item.name)}
                   className={`flex items-center p-2 rounded-lg group ${
                     item.current
@@ -54,10 +59,26 @@ const Sidebar = ({ sidebarItems, setCurrentChat }: SideBarProps) => {
                   }`}
                 >
                   <span className="ms-3">{item.name}</span>
-                </a>
+                </div>
               </li>
             ))}
           </ul>
+          <div className="mt-4">
+            <input
+              type="text"
+              placeholder="Name"
+              value={newItemName}
+              onChange={(e) => setNewItemName(e.target.value)}
+              className="w-full p-2 mb-2 text-sm text-gray-900 bg-gray-100 rounded-lg dark:bg-gray-700 dark:text-white"
+            />
+
+            <button
+              onClick={addSidebarItem}
+              className="w-full p-2 text-sm text-white bg-blue-600 rounded-lg hover:bg-blue-700"
+            >
+              Add New Item
+            </button>
+          </div>
         </div>
       </aside>
     </>

@@ -22,7 +22,6 @@ function UserInputBox({ addChatItem, currentChat }: UserInputBoxProps) {
   const [userText, setUserText] = useState<string>("");
 
   const { value: settingsValue } = useLocalStorage<Settings>("settings");
-  console.log(settingsValue);
   const settings = settingsValue || { privateKey: "", prompts: ["", ""] };
 
   const privateKey = settings.privateKey;
@@ -34,7 +33,6 @@ function UserInputBox({ addChatItem, currentChat }: UserInputBoxProps) {
   };
 
   const handleSubmit = async () => {
-    console.log(privateKey, prompt1Value, prompt2Value);
     if (!userText.trim() || !privateKey) return;
     const main = userText;
     const ans1 = await getAI(
@@ -61,7 +59,6 @@ function UserInputBox({ addChatItem, currentChat }: UserInputBoxProps) {
   };
 
   const handleKeyDown = (event: React.KeyboardEvent<HTMLTextAreaElement>) => {
-    console.log(privateKey, prompt1Value, prompt2Value);
     if (event.key === "Enter" && !event.shiftKey) {
       event.preventDefault();
       handleSubmit();
