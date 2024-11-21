@@ -1,50 +1,73 @@
-# React + TypeScript + Vite
+To make your English learning application more engaging and effective, you can improve the prompts in your `getAI` calls. Focus on making the instructions clearer, offering varied learning opportunities, and providing context. Here are some ideas for better prompts:
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+### Current Prompts:
 
-Currently, two official plugins are available:
+1. **Improve the text** → Make it more specific and actionable:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+   - _"Rewrite this text in a more natural and fluent English style:"_
+   - _"Rewrite this text to make it clearer and more professional:"_
 
-## Expanding the ESLint configuration
+2. **List all the grammatical errors and fix them** → Enhance with examples:
+   - _"Identify all grammatical errors in this text, explain them, and then rewrite the text with corrections:"_
+   - _"Find grammar issues, briefly explain why they are incorrect, and provide a corrected version of this text:"_
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+---
 
-- Configure the top-level `parserOptions` property like this:
+### Additional Prompts for Better Learning:
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+1. **Vocabulary Improvement**:
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+   - _"Suggest synonyms for words in this text to improve its vocabulary:"_
+   - _"Highlight advanced vocabulary words and explain their meanings:"_
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+2. **Tone Adjustment**:
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+   - _"Make this text sound more formal and professional:"_
+   - _"Rewrite this text to make it sound more casual and conversational:"_
+
+3. **Cultural Context**:
+
+   - _"Adapt this text for an American audience to ensure cultural appropriateness:"_
+   - _"Make this text more relevant for a British English speaker:"_
+
+4. **Learning Variations**:
+
+   - _"Convert this text into a question-and-answer style for practice:"_
+   - _"Create a short story using this text as a starting point:"_
+
+5. **Practice with Idioms**:
+
+   - _"Replace phrases in this text with common English idioms where appropriate:"_
+   - _"Add at least three idioms to this text to make it more dynamic:"_
+
+6. **Grammar Practice**:
+
+   - _"Create multiple-choice grammar questions based on errors in this text:"_
+   - _"Generate a fill-in-the-blank exercise from this text:"_
+
+7. **Pronunciation Practice**:
+
+   - _"Break this text into phonetic syllables for pronunciation practice:"_
+   - _"Identify words in this text that might be challenging to pronounce and provide audio hints:"_
+
+8. **Focus on Specific Grammar Rules**:
+
+   - _"Rephrase this text using the past perfect tense:"_
+   - _"Rewrite this text using conditionals (e.g., if-clauses):"_
+
+9. **Creative Practice**:
+
+   - _"Turn this text into a poem or a song:"_
+   - _"Use this text as the beginning of a fictional dialogue between two characters:"_
+
+10. **Error Identification Challenge**:
+
+    - _"Introduce one deliberate grammatical error into this text and challenge the user to find and correct it:"_
+
+11. **Language Expansion**:
+    - _"Translate this text into simple English for a beginner learner:"_
+    - _"Translate this text into Spanish and back into English to compare meanings:"_
+
+---
+
+By diversifying the prompts, you create a richer and more engaging learning environment for users. You can dynamically add these prompts to enhance interactivity and tailor the learning experience to the user's level and goals.

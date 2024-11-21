@@ -13,8 +13,11 @@ function Menu() {
 
   const { value: storedSettings, setValue: setStoredSettings } =
     useLocalStorage<Settings>("settings", {
-      privateKey: "",
-      prompts: ["", ""],
+      privateKey: "IAerZcMi5stGLiBHDtZjYYE8RdZd0m0CE2NIhkk",
+      prompts: [
+        "Rewrite this text in a more natural and fluent English style:",
+        "Find grammar issues, briefly explain why they are incorrect, and provide a corrected version of this text:",
+      ],
     });
 
   const handleOpenModal = () => {
